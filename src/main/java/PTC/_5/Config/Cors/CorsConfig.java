@@ -67,7 +67,7 @@ public class CorsConfig {
         configuration.addAllowedOrigin("http://localhost:4200");
         configuration.addAllowedOrigin("https://localhost");
         configuration.addAllowedOrigin("http://localhost");
-        configuration.addAllowedOrigin("https://*.herokuapp.com");
+        configuration.addAllowedOrigin(" https://arqosapi-9796070a345d.herokuapp.com/");
         configuration.addAllowedOrigin("https://learn-api-steel.vercel.app/");
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");

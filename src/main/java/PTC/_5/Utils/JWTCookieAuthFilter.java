@@ -141,7 +141,7 @@ public class JWTCookieAuthFilter extends OncePerRequestFilter
         // 13Mostrar
         //--- Ubicacion Controller
         //14Mostrar
-        //--- Uso de Firebase
+        //--- Uso de Cloudinary
         //15Agregar
         return (path.equals("/Pin/enviar") && "POST".equals(method)) ||
                 (path.equals("/Pin/validar") && "POST".equals(method)) ||

@@ -136,15 +136,40 @@
 	<build>
 		<plugins>
 			<!--Plugins agregados-->
-			<plugin>
 
-				<groupId>org.apache.maven.plugins</groupId>
+				<!-- Plugin WAR -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>3.3.2</version>
+				</plugin>
 
-				<artifactId>maven-war-plugin</artifactId>
+				<!-- Plugin para descargar webapp-runner -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>3.1.2</version>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>copy</goal>
+							</goals>
+							<configuration>
+								<artifactItems>
+									<artifactItem>
+										<groupId>com.github.jsimone</groupId>
+										<artifactId>webapp-runner</artifactId>
+										<version>9.0.41.0</version>
+										<destFileName>webapp-runner.jar</destFileName>
+									</artifactItem>
+								</artifactItems>
+								<outputDirectory>${project.build.directory}/dependency</outputDirectory>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
 
-				<version>3.3.2</version>
-
-			</plugin>
 			<!--Plugins agregados-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

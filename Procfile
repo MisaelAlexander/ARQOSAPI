@@ -1,1 +1,1 @@
-java -jar target/2025-0.0.1-SNAPSHOT.war
+

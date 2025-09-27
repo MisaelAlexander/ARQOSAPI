@@ -44,7 +44,6 @@ public class SecurityConfig
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // ← Permite preflight requests
                         .requestMatchers(HttpMethod.POST,"/Usuario/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/Usuario/logout").permitAll()
-                        .requestMatchers("/Usuario/me").authenticated()
                         .requestMatchers(HttpMethod.GET, "/Usuario/BuscarPorCorreo").permitAll()
                         .requestMatchers(HttpMethod.GET, "/Usuario/BuscarPorUsuario").permitAll()
                         .requestMatchers(HttpMethod.POST, "/Usuario/Recuperar").permitAll()
@@ -70,6 +69,7 @@ public class SecurityConfig
                        // .requestMatchers("/api/test/admin-only").hasRole("Administrador")
                         //.requestMatchers("/api/test/cliente-only").hasRole("Cliente")
                         //TODOS AUTENTICADOS QUE USAN LOS USUARIOS Y LOS VENDEDORES
+                        .requestMatchers("/Usuario/me").authenticated()
                         .anyRequest().authenticated())
                 .sessionManagement(sess -> sess
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -225,7 +225,7 @@ public class UsuarioController
                             "Secure; " +
                             "SameSite=None; " +
                             "MaxAge=86400; " +
-                            "Domain=arqosapi-9796070a345d.herokuapp.com/",
+                            "Domain=arqosapi-9796070a345d.herokuapp.com",
                     token
             );
 
@@ -330,7 +330,7 @@ public class UsuarioController
                         "HttpOnly; Secure; " +
                         "SameSite=None; " +
                         "MaxAge=0;" +
-                        " Domain=learnapifront-9de8a2348f9a.herokuapp.com";
+                        " Domain=arqosapi-9796070a345d.herokuapp.com";
 
         response.addHeader("Set-Cookie", cookieValue);
         //response.addHeader("Access-Control-Allow-Credentials", "true"); <-- ESTO NO DEBEN AGREGARLO

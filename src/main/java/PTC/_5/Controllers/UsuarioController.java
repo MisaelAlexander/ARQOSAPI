@@ -211,7 +211,7 @@ public class UsuarioController
             UsuarioEntity user = userOpt.get();
             String token = jwtUtils.create(
                     String.valueOf(user.getIDUsuario()),
-                    user.getUsuario(),
+                    user.getDescripcion().getNombre(),
                     String.valueOf(user.getDescripcion().getUbicacion().getIDUbicacion()),
                     user.getDescripcion().getRol().getRol(),
                     String.valueOf(user.getDescripcion().getEstado())

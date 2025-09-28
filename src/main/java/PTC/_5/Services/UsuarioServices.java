@@ -94,7 +94,7 @@ public class UsuarioServices
 
         if (dto.getEstado() != null) existe.setEstado(dto.getEstado());
         if (dto.getFechadecreacion() != null) existe.setFechaDeCreacion(dto.getFechadecreacion());
-        if (dto.getContrasenia() != null) existe.setContrasena((dto.getContrasenia()));
+        //if (dto.getContrasenia() != null) existe.setContrasena((dto.getContrasenia()));
 
 
         // Actualizar descripción

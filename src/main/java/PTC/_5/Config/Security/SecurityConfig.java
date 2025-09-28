@@ -51,7 +51,7 @@ public class SecurityConfig
                         .requestMatchers(HttpMethod.POST, "/Historial/Guardar").permitAll()
                         //VENDEDOR
                         .requestMatchers(HttpMethod.GET, "/Banio/Mostrar").hasRole("Vendedor")
-                        .requestMatchers(HttpMethod.GET, "/Estado/Mostrar").hasRole("Vendedor")
+                        //.requestMatchers(HttpMethod.GET, "/Estado/Mostrar").hasRole("Vendedor")
                         .requestMatchers(HttpMethod.POST, "/Foto/Guardar").hasRole("Vendedor")
                         .requestMatchers(HttpMethod.DELETE, "/Foto/Eliminar/{id}").hasRole("Vendedor")
                         .requestMatchers(HttpMethod.GET, "/Habitacion/Mostrar").hasRole("Vendedor")

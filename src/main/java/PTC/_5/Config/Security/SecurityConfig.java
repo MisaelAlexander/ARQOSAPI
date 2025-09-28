@@ -57,7 +57,7 @@ public class SecurityConfig
                         .requestMatchers(HttpMethod.GET, "/Habitacion/Mostrar").hasRole("Vendedor")
                         .requestMatchers(HttpMethod.POST, "/Inmueble/Guardar").hasRole("Vendedor")
                         .requestMatchers(HttpMethod.PUT, "/Inmueble/Actualizar/{id}").hasRole("Vendedor")
-                        .requestMatchers(HttpMethod.GET, "/Tipo/Mostrar").hasRole("Vendedor")
+                        //.requestMatchers(HttpMethod.GET, "/Tipo/Mostrar").hasRole("Vendedor")
                         .requestMatchers(HttpMethod.GET, "/TipoVisita/Mostrar").hasRole("Vendedor")
                         .requestMatchers(HttpMethod.GET, "/Visita/Actualizar/{id}").hasRole("Vendedor")
                         //USUARIO

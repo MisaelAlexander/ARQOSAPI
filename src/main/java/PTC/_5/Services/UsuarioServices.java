@@ -88,7 +88,10 @@ public class UsuarioServices
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id " + id));
 
         // Actualizar datos permitidos del usuario
-        if (dto.getUsuario() != null) existe.setUsuario(dto.getUsuario());
+        if (dto.getUsuario() != null && !dto.getUsuario().equals(existe.getUsuario())) {
+            existe.setUsuario(dto.getUsuario());
+        }
+
         if (dto.getEstado() != null) existe.setEstado(dto.getEstado());
         if (dto.getFechadecreacion() != null) existe.setFechaDeCreacion(dto.getFechadecreacion());
         if (dto.getContrasenia() != null) existe.setContrasena(argon2.EncryptPassword(dto.getContrasenia()));

@@ -19,6 +19,8 @@ public interface VisitaRepository extends JpaRepository<VisitaEntity, Long>
 
     Page<VisitaEntity> findByinmueble_tituloContainingIgnoreCaseAndCliente_IDUsuario(String titulo, Long idUsuario, Pageable pageable);
 
+    Page<VisitaEntity> findByinmueble_tituloContainingIgnoreCaseAndVendedor_IDUsuario(String titulo, Long idVendedor, Pageable pageable);
+
     List<VisitaEntity> findByinmueble_IDInmueble(Long idInmueble);
 
     // Buscar visitas por estado y cliente

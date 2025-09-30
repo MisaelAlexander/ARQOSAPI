@@ -111,15 +111,36 @@ public class VisitaController
         );
     }
 
-    // localhost:8080/Visita/BuscarPorTitulo?titulo=casa&idUsuario=1&page=0&size=10
-    @GetMapping("/BuscarPorTitulo")
-    public ResponseEntity<ApiResponse<ApiPageResponse<VisitaDTO>>> buscarPorTitulo(
+    // localhost:8080/Visita/BuscarPorTituloU?titulo=casa&idUsuario=1&page=0&size=10
+    @GetMapping("/BuscarPorTituloU")
+    public ResponseEntity<ApiResponse<ApiPageResponse<VisitaDTO>>> buscarPorTituloU(
             @RequestParam String titulo,
             @RequestParam Long idUsuario,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
 
         Page<VisitaDTO> pageData = acceso.obtenerVisitasPorTituloInmuebleYCliente(
+                titulo,
+                idUsuario,
+                PageRequest.of(page, size)
+        );
+
+        ApiPageResponse<VisitaDTO> pageResponse = new ApiPageResponse<>(pageData);
+
+        return ResponseEntity.ok(
+                new ApiResponse<>(true, "Visitas filtradas por título obtenidas correctamente", pageResponse)
+        );
+    }
+
+    // localhost:8080/Visita/BuscarPorTituloV?titulo=casa&idUsuario=1&page=0&size=10
+    @GetMapping("/BuscarPorTituloV")
+    public ResponseEntity<ApiResponse<ApiPageResponse<VisitaDTO>>> buscarPorTituloV(
+            @RequestParam String titulo,
+            @RequestParam Long idUsuario,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        Page<VisitaDTO> pageData = acceso.obtenerVisitasPorTituloInmuebleYVendedor(
                 titulo,
                 idUsuario,
                 PageRequest.of(page, size)

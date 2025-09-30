@@ -137,6 +137,15 @@ public class VisitaService
     }
 
     // ======================
+// Buscar visitas por título del inmueble y cliente
+// ======================
+    public Page<VisitaDTO> obtenerVisitasPorTituloInmuebleYVendedor(String titulo, Long idUsuario, Pageable pageable) {
+        return visrepo
+                .findByinmueble_tituloContainingIgnoreCaseAndVendedor_IDUsuario(titulo, idUsuario, pageable)
+                .map(this::convertirDTO);
+    }
+
+    // ======================
     // Buscar visitas por ID del inmueble
     // ======================
     public List<VisitaDTO> obtenerVisitasPorInmueble(Long idInmueble) {

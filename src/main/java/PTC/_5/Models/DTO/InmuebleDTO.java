@@ -40,7 +40,7 @@ public class InmuebleDTO
     private Double latitud;
 
     @NotBlank(message = "La descripcion es obligatoria")
-    @Size(max = 1000d, message = "La descripicon de la casa puede tener maximo 1000 caracteres")
+    @Size(max = 1000, message = "La descripicon de la casa puede tener maximo 1000 caracteres")
     private String descripcion;
     @NotNull(message = "El estado no es nulo")
     private Boolean estado;

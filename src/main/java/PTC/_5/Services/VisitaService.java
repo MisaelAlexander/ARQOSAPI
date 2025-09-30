@@ -148,11 +148,9 @@ public class VisitaService
     // ======================
     // Buscar visitas por ID del inmueble
     // ======================
-    public List<VisitaDTO> obtenerVisitasPorInmueble(Long idInmueble) {
-        List<VisitaEntity> visitas = visrepo.findByinmueble_IDInmueble(idInmueble);
-        return visitas.stream()
-                .map(this::convertirDTO)
-                .collect(Collectors.toList());
+    public Page<VisitaDTO> obtenerVisitasPorInmueble(Long idInmueble, Pageable pageable) {
+        return  visrepo.findByinmueble_IDInmueble(idInmueble,  pageable)
+                .map(this::convertirDTO);
     }
 
     // ======================

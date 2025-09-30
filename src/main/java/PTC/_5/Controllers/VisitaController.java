@@ -155,15 +155,18 @@ public class VisitaController
 
 
 
-    // localhost:8080/Visita/Inmueble/10
+    // localhost:8080/Visita/Inmueble/{idInmueble}?page={page}&size={size}
     @GetMapping("/Inmueble/{idInmueble}")
-    public ResponseEntity<ApiResponse<List<VisitaDTO>>> obtenerVisitasPorInmueble(
-            @PathVariable Long idInmueble) {
+    public ResponseEntity<ApiResponse<ApiPageResponse<VisitaDTO>>> obtenerVisitasPorInmueble(
+            @PathVariable Long idInmueble,
+    @RequestParam(defaultValue = "0") int page,
+    @RequestParam(defaultValue = "10") int size) {
 
-        List<VisitaDTO> visitas = acceso.obtenerVisitasPorInmueble(idInmueble);
+        Page<VisitaDTO> visitas = acceso.obtenerVisitasPorInmueble(idInmueble, PageRequest.of(page, size));
 
+        ApiPageResponse<VisitaDTO> pageResponse = new ApiPageResponse<>(visitas);
         return ResponseEntity.ok(
-                new ApiResponse<>(true, "Visitas por inmueble obtenidas correctamente", visitas)
+                new ApiResponse<>(true, "Visitas filtradas por título obtenidas correctamente", pageResponse)
         );
     }
 }

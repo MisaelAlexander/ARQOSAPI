@@ -224,7 +224,7 @@ public class UsuarioController
                             "HttpOnly; " +
                             "Secure; " +
                             "SameSite=None; " +
-                            "MaxAge=86400; " +
+                            "MaxAge=840; " +
                             "Domain=arqosapi-9796070a345d.herokuapp.com",
                     token
             );

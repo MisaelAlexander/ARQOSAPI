@@ -69,7 +69,7 @@ public class UsuarioServices
         // Si el usuario tiene una descripción relacionada (nombre, dirección, etc.)
         if (dto.getIddescripcion() != null) {
             DescripcionEntity descentity = ServiDesc.buscariddedesc(dto.getIddescripcion());
-            UserEntity.setDescripcion(descentity);
+            UserEntity.setDESCRIPCION(descentity);
         }
 
         // Guarda el usuario en la base de datos
@@ -114,7 +114,7 @@ public class UsuarioServices
             descDto.setEstado(dto.getEstadoD());
 
             // Rol se conserva automáticamente desde la entidad existente
-            DescripcionEntity descExistente = existe.getDescripcion();
+            DescripcionEntity descExistente = existe.getDESCRIPCION();
             descDto.setIdrol(descExistente.getRol().getIDRol());
 
             // Ubicación editable
@@ -125,7 +125,7 @@ public class UsuarioServices
             DescripcionDTO descActualizada = ServiDesc.actualizarDescripcion(descDto.getIddescripcion(), descDto);
 
             // Asignar la descripción actualizada al usuario
-            existe.setDescripcion(ServiDesc.buscariddedesc(descActualizada.getIddescripcion()));
+            existe.setDESCRIPCION(ServiDesc.buscariddedesc(descActualizada.getIddescripcion()));
         }
 
         // ============================
@@ -176,31 +176,31 @@ public class UsuarioServices
         dto.setFechadecreacion(entity.getFechaDeCreacion());
 
         // Si el usuario tiene descripción (relación con TBDescripcion)
-        if (entity.getDescripcion() != null)
+        if (entity.getDESCRIPCION() != null)
         {
-            dto.setIddescripcion(entity.getDescripcion().getIDDescripcion());
-            dto.setNombre(entity.getDescripcion().getNombre());
-            dto.setApellido(entity.getDescripcion().getApellido());
-            dto.setDui(entity.getDescripcion().getDui());
-            dto.setDireccion(entity.getDescripcion().getDireccion());
-            dto.setCorreo(entity.getDescripcion().getCorreo());
-            dto.setTelefono(entity.getDescripcion().getTelefono());
-            dto.setFotoPerfil(entity.getDescripcion().getFotoPerfil());
-            dto.setFechadeNacimiento(entity.getDescripcion().getFechaNacimiento());
-            dto.setEstadoD(entity.getDescripcion().getESTADO());
+            dto.setIddescripcion(entity.getDESCRIPCION().getIDDescripcion());
+            dto.setNombre(entity.getDESCRIPCION().getNombre());
+            dto.setApellido(entity.getDESCRIPCION().getApellido());
+            dto.setDui(entity.getDESCRIPCION().getDui());
+            dto.setDireccion(entity.getDESCRIPCION().getDireccion());
+            dto.setCorreo(entity.getDESCRIPCION().getCorreo());
+            dto.setTelefono(entity.getDESCRIPCION().getTelefono());
+            dto.setFotoPerfil(entity.getDESCRIPCION().getFotoPerfil());
+            dto.setFechadeNacimiento(entity.getDESCRIPCION().getFechaNacimiento());
+            dto.setEstadoD(entity.getDESCRIPCION().getESTADO());
 
             // Si la descripción tiene ubicación
-            if (entity.getDescripcion().getUbicacion() != null)
+            if (entity.getDESCRIPCION().getUbicacion() != null)
             {
-                dto.setIDUbicacion(entity.getDescripcion().getUbicacion().getIDUbicacion());
-                dto.setUbicacion(entity.getDescripcion().getUbicacion().getUbicacion());
+                dto.setIDUbicacion(entity.getDESCRIPCION().getUbicacion().getIDUbicacion());
+                dto.setUbicacion(entity.getDESCRIPCION().getUbicacion().getUbicacion());
             }
 
             // Si la descripción tiene rol
-            if (entity.getDescripcion().getRol() != null)
+            if (entity.getDESCRIPCION().getRol() != null)
             {
-                dto.setIDRol(entity.getDescripcion().getRol().getIDRol());
-                dto.setRol(entity.getDescripcion().getRol().getRol());
+                dto.setIDRol(entity.getDESCRIPCION().getRol().getIDRol());
+                dto.setRol(entity.getDESCRIPCION().getRol().getRol());
             }
         }
 
@@ -210,13 +210,13 @@ public class UsuarioServices
 
     /*Buscar por Usuario*/
     public UsuarioDTO buscarPorUsuario(String usuario) {
-        UsuarioEntity entity = userRepo.findByUsuarioAnddescripcion_ESTADOTrue(usuario)
+        UsuarioEntity entity = userRepo.findByUsuarioAndDESCRIPCION_ESTADOTrue(usuario)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con nombre: " + usuario));
         return convertirDTO(entity);
     }
     /*Buscar por correo*/
     public UsuarioDTO buscarPorCorreo(String correo) {
-        UsuarioEntity entity = userRepo.findBydescripcion_CorreoAnddescripcion_ESTADOTrue(correo)
+        UsuarioEntity entity = userRepo.findByDESCRIPCION_CorreoAndDESCRIPCION_ESTADOTrue(correo)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con correo: " + correo));
         return convertirDTO(entity);
     }
@@ -230,23 +230,23 @@ public class UsuarioServices
         if (usuarioOCorreo.contains("@"))
         {
             //buscar aen correo
-            usuarioOpt = userRepo.findBydescripcion_CorreoAnddescripcion_ESTADOTrue(usuarioOCorreo);
+            usuarioOpt = userRepo.findByDESCRIPCION_CorreoAndDESCRIPCION_ESTADOTrue(usuarioOCorreo);
         }
         else
         //Si no lleva @ busca por nombre
         {
-            usuarioOpt = userRepo.findByUsuarioAnddescripcion_ESTADOTrue(usuarioOCorreo);
+            usuarioOpt = userRepo.findByUsuarioAndDESCRIPCION_ESTADOTrue(usuarioOCorreo);
         }
         if (usuarioOpt.isEmpty()) return false;
 
         UsuarioEntity user = usuarioOpt.get();
-        PinServi.generarYEnviarPin(user.getDescripcion().getCorreo()); // Enviar PIN al correo
+        PinServi.generarYEnviarPin(user.getDESCRIPCION().getCorreo()); // Enviar PIN al correo
         return true;
     }
 
     // Restablecer contraseña
     public UsuarioDTO actualizarContrasenaPorCorreo(String usuario, String nuevaContrasena) {
-        UsuarioEntity user = userRepo.findByUsuarioAnddescripcion_ESTADOTrue(usuario)
+        UsuarioEntity user = userRepo.findByUsuarioAndDESCRIPCION_ESTADOTrue(usuario)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         user.setContrasena(argon2.EncryptPassword(nuevaContrasena));
         UsuarioEntity usuarioActualizado = userRepo.save(user);
@@ -282,22 +282,22 @@ public class UsuarioServices
         Argon2Password objHash = new Argon2Password();
 
         // Buscar usuario
-        Optional<UsuarioEntity> list = userRepo.findByUsuarioAnddescripcion_ESTADOTrue(usuario).stream().findFirst();
+        Optional<UsuarioEntity> list = userRepo.findByUsuarioAndDESCRIPCION_ESTADOTrue(usuario).stream().findFirst();
         if (list.isPresent())
         {
             UsuarioEntity usuariolog= list.get();
-            String nombre = usuariolog.getDescripcion().getNombre();
+            String nombre = usuariolog.getDESCRIPCION().getNombre();
             System.out.println("Usuario encontrado con ID: " + usuariolog.getIDUsuario() +
                     "Usuario" + usuariolog.getUsuario() +
-                    "IDUbicacion" + usuariolog.getDescripcion().getUbicacion().getIDUbicacion()+
-                    "Rol"+ usuariolog.getDescripcion().getRol().getIDRol());
+                    "IDUbicacion" + usuariolog.getDESCRIPCION().getUbicacion().getIDUbicacion()+
+                    "Rol"+ usuariolog.getDESCRIPCION().getRol().getIDRol());
             return objHash.VerifyPassword(usuariolog.getContrasena(), contrasena);
         }
         return false;
     }
 
     public Optional<UsuarioEntity> obtenerUsuario(String Usuario){
-        Optional<UsuarioEntity> userOpt = userRepo.findByUsuarioAnddescripcion_ESTADOTrue(Usuario);
+        Optional<UsuarioEntity> userOpt = userRepo.findByUsuarioAndDESCRIPCION_ESTADOTrue(Usuario);
         return (userOpt != null) ? userOpt : null;
     }
 }

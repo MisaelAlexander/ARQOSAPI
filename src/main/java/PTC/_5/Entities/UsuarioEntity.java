@@ -33,7 +33,7 @@ public class UsuarioEntity {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "IDDescripcion", referencedColumnName = "IDDescripcion")
-    private DescripcionEntity descripcion;
+    private DescripcionEntity DESCRIPCION;
 
     @Column(name = "ESTADO")
     private Boolean estado;

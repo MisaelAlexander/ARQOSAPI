@@ -31,7 +31,7 @@ public interface InmuebleRepository extends JpaRepository<InmuebleEntity, Long>
     // Buscar por ubicación y usuario
     Page<InmuebleEntity> findByUbicacion_IDUbicacionAndUsuario_IDUsuarioAndEstadoTrue(
             Long idUbicacion, Long idUsuario, Pageable pageable);
-
+    
     // Buscar por tipo y usuario
     Page<InmuebleEntity> findByTipo_IDTipoAndUsuario_IDUsuarioAndEstadoTrue(
             Long idTipo, Long idUsuario, Pageable pageable);

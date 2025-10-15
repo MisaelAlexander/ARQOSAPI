@@ -16,8 +16,8 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long>
     //Usmaos boolean por que es para validacion devuelve un si o no si ya esta o no esta
     boolean existsByusuario(String User);
 
-    Optional<UsuarioEntity> findByusuarioAnddescripcion_estadoTrue(String usuario);
+    Optional<UsuarioEntity> findByusuarioAnddescripcion_EstadoTrue(String usuario);
 
     //   Buscar usuario por correo (join con DescripcionEntity)
-    Optional<UsuarioEntity> findBydescripcion_CorreoAnddescripcion_estadoTrue(String correo);
+    Optional<UsuarioEntity> findBydescripcion_CorreoAnddescripcion_EstadoTrue(String correo);
 }

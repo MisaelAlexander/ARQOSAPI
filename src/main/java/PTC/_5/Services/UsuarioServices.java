@@ -210,13 +210,13 @@ public class UsuarioServices
 
     /*Buscar por Usuario*/
     public UsuarioDTO buscarPorUsuario(String usuario) {
-        UsuarioEntity entity = userRepo.findByusuarioAnddescripcion_estadoTrue(usuario)
+        UsuarioEntity entity = userRepo.findByusuarioAnddescripcion_EstadoTrue(usuario)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con nombre: " + usuario));
         return convertirDTO(entity);
     }
     /*Buscar por correo*/
     public UsuarioDTO buscarPorCorreo(String correo) {
-        UsuarioEntity entity = userRepo.findBydescripcion_CorreoAnddescripcion_estadoTrue(correo)
+        UsuarioEntity entity = userRepo.findBydescripcion_CorreoAnddescripcion_EstadoTrue(correo)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con correo: " + correo));
         return convertirDTO(entity);
     }
@@ -230,12 +230,12 @@ public class UsuarioServices
         if (usuarioOCorreo.contains("@"))
         {
             //buscar aen correo
-            usuarioOpt = userRepo.findBydescripcion_CorreoAnddescripcion_estadoTrue(usuarioOCorreo);
+            usuarioOpt = userRepo.findBydescripcion_CorreoAnddescripcion_EstadoTrue(usuarioOCorreo);
         }
         else
         //Si no lleva @ busca por nombre
         {
-            usuarioOpt = userRepo.findByusuarioAnddescripcion_estadoTrue(usuarioOCorreo);
+            usuarioOpt = userRepo.findByusuarioAnddescripcion_EstadoTrue(usuarioOCorreo);
         }
         if (usuarioOpt.isEmpty()) return false;
 
@@ -246,7 +246,7 @@ public class UsuarioServices
 
     // Restablecer contraseña
     public UsuarioDTO actualizarContrasenaPorCorreo(String usuario, String nuevaContrasena) {
-        UsuarioEntity user = userRepo.findByusuarioAnddescripcion_estadoTrue(usuario)
+        UsuarioEntity user = userRepo.findByusuarioAnddescripcion_EstadoTrue(usuario)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         user.setContrasena(argon2.EncryptPassword(nuevaContrasena));
         UsuarioEntity usuarioActualizado = userRepo.save(user);
@@ -282,7 +282,7 @@ public class UsuarioServices
         Argon2Password objHash = new Argon2Password();
 
         // Buscar usuario
-        Optional<UsuarioEntity> list = userRepo.findByusuarioAnddescripcion_estadoTrue(usuario).stream().findFirst();
+        Optional<UsuarioEntity> list = userRepo.findByusuarioAnddescripcion_EstadoTrue(usuario).stream().findFirst();
         if (list.isPresent())
         {
             UsuarioEntity usuariolog= list.get();
@@ -297,7 +297,7 @@ public class UsuarioServices
     }
 
     public Optional<UsuarioEntity> obtenerUsuario(String Usuario){
-        Optional<UsuarioEntity> userOpt = userRepo.findByusuarioAnddescripcion_estadoTrue(Usuario);
+        Optional<UsuarioEntity> userOpt = userRepo.findByusuarioAnddescripcion_EstadoTrue(Usuario);
         return (userOpt != null) ? userOpt : null;
     }
 }

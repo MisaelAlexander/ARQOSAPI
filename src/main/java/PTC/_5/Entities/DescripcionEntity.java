@@ -49,7 +49,7 @@ public class DescripcionEntity
     @Column (name = "FECHANACIMIENTO")
     private Date FechaNacimiento;
     @Column (name = "ESTADO")
-    private Boolean ESTADO;
+    private Boolean Estado;
 
     //Relacion @One to One
     //ES COMO UN PUENTE PARA CONETAR ROL Y UBICAION

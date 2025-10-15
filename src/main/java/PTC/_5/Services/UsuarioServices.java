@@ -272,7 +272,7 @@ public class UsuarioServices
         }
     }
     public boolean existeUsuario(String user) {
-        return userRepo.existsByusuario(user);
+        return userRepo.existsByusuarioAnddescripcion_EstadoTrue(user);
     }
 
 

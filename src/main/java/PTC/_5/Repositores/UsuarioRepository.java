@@ -14,7 +14,7 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long>
     Long countByfechaDeCreacion(java.sql.Date fechadeCreacion);
 
     //Usmaos boolean por que es para validacion devuelve un si o no si ya esta o no esta
-    boolean existsByusuario(String User);
+    boolean existsByusuarioAnddescripcion_EstadoTrue(String User);
 
     Optional<UsuarioEntity> findByusuario(String usuario);
 

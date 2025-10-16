@@ -42,11 +42,12 @@ public class UsuarioServices
 
     @Autowired
     Argon2Password objHash;
-    // Método NUEVO específico para desactivar cuenta + inmuebles
+
+
     public UsuarioDTO desactivarUsuarioYInmuebles(Long id) {
-        // 1. Buscar el usuario
+        // 1. Buscar el usuario si
         UsuarioEntity usuario = userRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado: " + id));
 
         // 2. Desactivar el usuario
         usuario.setEstado(false);

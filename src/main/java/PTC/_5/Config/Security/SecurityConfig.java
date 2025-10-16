@@ -75,6 +75,8 @@ public class SecurityConfig
                         //.requestMatchers("/api/test/cliente-only").hasRole("Cliente")
                         //TODOS AUTENTICADOS QUE USAN LOS USUARIOS Y LOS VENDEDORES
                         .requestMatchers("/Usuario/me").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/Usuario/Desactivar/**").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/Usuario/Actualizar/**").authenticated()
                         .anyRequest().authenticated())
                 .sessionManagement(sess -> sess
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

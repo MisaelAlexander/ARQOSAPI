@@ -12,6 +12,6 @@ import java.util.List;
 public interface FavoritosRepository extends JpaRepository<FavoritosEntity, Long>
 {
     // Buscar favoritos por id de usuario
-    Page<FavoritosEntity> findByusuario_IDUsuario(Long idUsuario, Pageable pageable);
+    Page<FavoritosEntity> findByUsuario_IDUsuarioAndInmueble_EstadoTrue(Long idUsuario, Pageable pageable);
 
 }

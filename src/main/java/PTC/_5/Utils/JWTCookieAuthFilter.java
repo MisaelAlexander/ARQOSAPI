@@ -147,7 +147,6 @@ public class JWTCookieAuthFilter extends OncePerRequestFilter
         return (path.equals("/Pin/enviar") && "POST".equals(method)) ||
                 (path.equals("/Pin/validar") && "POST".equals(method)) ||
                 (path.equals("/Descripcion/Guardar") && "POST".equals(method)) ||
-                (path.startsWith("/Descripcion/Eliminar/") && "DELETE".equals(method)) ||
                 (path.equals("/Descripcion/check-dui") && "GET".equals(method)) ||
                 (path.equals("/Descripcion/check-correo") && "GET".equals(method)) ||
                 (path.equals("/Descripcion/check-telefono") && "GET".equals(method)) ||
@@ -162,6 +161,7 @@ public class JWTCookieAuthFilter extends OncePerRequestFilter
                 (path.equals("/Ubicacion/Mostrar") && "GET".equals(method)) ||
                 (path.equals("/Imagen/Guardar") && "POST".equals(method))||
                 (path.equals("/Imagen/GuardarCarpeta") && "POST".equals(method))||
+                (path.startsWith("/Descripcion/Eliminar/") && "DELETE".equals(method)) ||
                 (path.equals("/Historial/Guardar") && "POST".equals(method));
     }
 }

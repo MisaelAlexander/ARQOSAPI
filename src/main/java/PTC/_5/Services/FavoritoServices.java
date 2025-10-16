@@ -29,7 +29,7 @@ public class FavoritoServices
     // Obtener favoritos por ID de usuario
     public Page<FavoritosDTO> obtenerFavoritosPorUsuario(Long idUsuario, Pageable pageable)
     {
-        Page<FavoritosEntity> page = favrepo.findByusuario_IDUsuario(idUsuario,pageable);
+        Page<FavoritosEntity> page = favrepo.findByUsuario_IDUsuarioAndInmueble_EstadoTrue(idUsuario,pageable);
         return page.map(this::convertirDTO);
     }
 

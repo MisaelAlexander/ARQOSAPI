@@ -38,6 +38,7 @@ public class SecurityConfig
                         .requestMatchers(HttpMethod.GET, "/Descripcion/check-telefono").permitAll()
                         .requestMatchers(HttpMethod.GET, "/Rol/Mostrar").permitAll()
                         .requestMatchers(HttpMethod.GET, "/Ubicacion/Mostrar").permitAll()
+                        .requestMatchers("/Usuario/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/Usuario/Guardar").permitAll()
                         .requestMatchers(HttpMethod.GET, "/Usuario/Contar").permitAll()
                         .requestMatchers(HttpMethod.GET, "/Usuario/ContarFecha").permitAll()

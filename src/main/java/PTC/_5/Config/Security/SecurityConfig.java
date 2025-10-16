@@ -32,7 +32,7 @@ public class SecurityConfig
                         .requestMatchers(HttpMethod.POST, "/Pin/enviar").permitAll()
                         .requestMatchers(HttpMethod.POST, "/Pin/validar").permitAll()
                         .requestMatchers(HttpMethod.POST, "/Descripcion/Guardar").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/Descripcion/Eliminar/{id}").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/Descripcion/Eliminar").permitAll()
                         .requestMatchers(HttpMethod.GET, "/Descripcion/check-dui").permitAll()
                         .requestMatchers(HttpMethod.GET, "/Descripcion/check-correo").permitAll()
                         .requestMatchers(HttpMethod.GET, "/Descripcion/check-telefono").permitAll()

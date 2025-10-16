@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface InmuebleRepository extends JpaRepository<InmuebleEntity, Long>
 {
+    List<InmuebleEntity> findByUsuario_IDUsuarioAndEstadoTrue(Long idUsuario);
     Page<InmuebleEntity> findByusuario_IDUsuarioAndEstadoTrue(Long id, Pageable pageable);
 
     Page<InmuebleEntity> findByubicacion_IDUbicacionAndEstadoTrue(Long id, Pageable pageable);

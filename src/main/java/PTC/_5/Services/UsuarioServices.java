@@ -2,15 +2,19 @@ package PTC._5.Services;
 
 import PTC._5.Config.Argon2.Argon2Password;
 import PTC._5.Entities.DescripcionEntity;
+import PTC._5.Entities.InmuebleEntity;
 import PTC._5.Entities.UsuarioEntity;
 import PTC._5.Exceptions.UsuarioException.DatosNoEncontradosExceptionDes;
 import PTC._5.Models.DTO.DescripcionDTO;
 import PTC._5.Models.DTO.UsuarioDTO;
 import PTC._5.Repositores.DescripcionRepository;
+import PTC._5.Repositores.InmuebleRepository;
 import PTC._5.Repositores.UsuarioRepository;
 import PTC._5.Services.CorreoPin.PinService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,7 +28,8 @@ public class UsuarioServices
     private DescripcionRepository descRepo;
     @Autowired
     private UsuarioRepository userRepo; // Repositorio para manejar datos de usuarios
-
+    @Autowired
+    private InmuebleRepository inmuebleRepository;
     @Autowired
     PinService PinServi;
 
@@ -37,7 +42,31 @@ public class UsuarioServices
 
     @Autowired
     Argon2Password objHash;
+    // Método NUEVO específico para desactivar cuenta + inmuebles
+    public UsuarioDTO desactivarUsuarioYInmuebles(Long id) {
+        // 1. Buscar el usuario
+        UsuarioEntity usuario = userRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + id));
 
+        // 2. Desactivar el usuario
+        usuario.setEstado(false);
+        UsuarioEntity usuarioActualizado = userRepo.save(usuario);
+
+        // 3. Buscar y desactivar todos los inmuebles activos del usuario
+        List<InmuebleEntity> inmueblesActivos = inmuebleRepository.findByUsuario_IDUsuarioAndEstadoTrue(id);
+
+        if (!inmueblesActivos.isEmpty()) {
+            for (InmuebleEntity inmueble : inmueblesActivos) {
+                inmueble.setEstado(false); // Cambiar estado a false
+            }
+            // Guardar todos los inmuebles actualizados
+            inmuebleRepository.saveAll(inmueblesActivos);
+
+            System.out.println("Se desactivaron " + inmueblesActivos.size() + " inmuebles del usuario ID: " + id);
+        }
+
+        return convertirDTO(usuarioActualizado);
+    }
     // =====================================
     // GET - Obtener todos los usuarios
     // =====================================

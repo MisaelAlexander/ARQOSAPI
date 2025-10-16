@@ -109,7 +109,28 @@ public class UsuarioController
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+    // Endpoint NUEVO específico para desactivar cuenta
+    @PutMapping("/Desactivar/{id}")
+    public ResponseEntity<ApiResponse<UsuarioDTO>> desactivarCuenta(@PathVariable Long id) {
+        try {
+            UsuarioDTO usuarioDesactivado = acceso.desactivarUsuarioYInmuebles(id);
+            return ResponseEntity.ok(new ApiResponse<>(
+                    true,
+                    "Cuenta e inmuebles desactivados correctamente",
+                    usuarioDesactivado
+            ));
 
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                    new ApiResponse<>(false, e.getMessage(), null)
+            );
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    new ApiResponse<>(false, "Error al desactivar la cuenta", null)
+            );
+        }
+    }
     // localhost:8080/Usuario/Actualizar/{id}
     @PutMapping("/Actualizar/{id}")
     public ResponseEntity<ApiResponse<UsuarioDTO>> actualizarSimple(
